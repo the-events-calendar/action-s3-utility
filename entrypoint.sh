@@ -2,6 +2,24 @@
 
 set -e
 
+commands=("sync" "exists" "ls")
+
+if [ -z "$COMMAND" ]; then
+  echo "You must specify a command to execute. Quitting."
+  exit 1
+fi
+
+for command_item in ${commands[@]}; do
+  if [[ "$command_item" == "$COMMAND" ]]; then
+    the_command=$COMMAND
+  fi
+done
+
+if [ -z "$the_command" ]; then
+  echo "You must specify a valid command (sync, exists). Quitting."
+  exit 1
+fi
+
 if [ -z "$S3_BUCKET" ]; then
   echo "S3_BUCKET is not set. Quitting."
   exit 1
@@ -27,36 +45,68 @@ if [ -z "$S3_ENDPOINT" ]; then
   ENDPOINT_APPEND="--endpoint-url $S3_ENDPOINT"
 fi
 
-if [ -z "$FILE" ]; then
-  echo "FILE is not set. Quitting."
-  exit 1
-fi
-
 # Create a dedicated profile for this action
-aws configure --profile action-s3-exists <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3 <<-EOF > /dev/null 2>&1
 ${S3_ACCESS_KEY_ID}
 ${S3_SECRET_ACCESS_KEY}
 ${S3_REGION}
 text
 EOF
 
-echo "Checking for file existence at s3://${S3_BUCKET}/${FILE} at the ${S3_ENDPOINT}"
+case $the_command in
+  'sync')
 
-# Verify file existence.
-sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} --profile action-s3-exists ${ENDPOINT_APPEND} $*"
+    # Sync path.
+    sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} --profile action-s3 --no-progress ${ENDPOINT_APPEND} $*"
 
-# XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
-if [ $? == 0 ]
-then
-  echo "File exists."
-  echo "::set-output name=exists::true"
-else
-  echo "File does not exist."
-  echo "::set-output name=exists::false"
-fi
+    ;;
+  'exists')
+    if [ -z "$FILE" ]; then
+      echo "FILE is not set. Quitting."
+      exit 1
+    fi
+
+    echo "Checking for file existence at s3://${S3_BUCKET}/${FILE} at the ${S3_ENDPOINT}"
+
+    # Verify file existence.
+    sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*"
+
+    # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
+    if [ $? == 0 ]
+    then
+      echo "File exists."
+      echo "::set-output name=exists::true"
+    else
+      echo "File does not exist."
+      echo "::set-output name=exists::false"
+    fi
+    ;;
+  'ls')
+    if [ -z "$FILE" ]; then
+      echo "FILE is not set. Quitting."
+      exit 1
+    fi
+
+    # Verify file existence.
+    output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*")
+
+    echo "::set-output name=value::${output}"
+    ;;
+  'rm')
+    if [ -z "$FILE" ]; then
+      echo "FILE is not set. Quitting."
+      exit 1
+    fi
+
+    # Verify file existence.
+    output=$(sh -c "aws s3 rm s3://${S3_BUCKET}/${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*")
+
+    echo "::set-output name=value::${output}"
+    ;;
+esac
 
 # Clear out credentials after we're done.
-aws configure --profile action-s3-exists <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3 <<-EOF > /dev/null 2>&1
 null
 null
 null
