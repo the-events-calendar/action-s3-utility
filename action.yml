@@ -1,0 +1,12 @@
+name: 'S3 Exists'
+description: 'Check if a file or directory exists within an S3 bucket'
+author: 'The Events Calendar (support@theeventscalendar.com)'
+branding:
+  icon: file
+  color: blue
+outputs:
+  exists:
+    description: \'true\' if file or directory exists, \'false\' otherwise
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
