@@ -43,15 +43,15 @@ EOF
 echo "Checking for file existence at s3://${S3_BUCKET}/${FILE} at the ${S3_ENDPOINT}"
 
 # Verify file existence.
-sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} \
-  --profile action-s3-exists \
-  ${ENDPOINT_APPEND} $*"
+sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} --profile action-s3-exists ${ENDPOINT_APPEND} $*"
 
 # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
 if [ $? == 0 ]
 then
+  echo "File exists."
   echo "::set-output name=exists::true"
 else
+  echo "File does not exist."
   echo "::set-output name=exists::false"
 fi
 
