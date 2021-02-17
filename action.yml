@@ -1,12 +1,14 @@
-name: 'S3 Exists'
-description: 'Check if a file or directory exists within an S3 bucket'
+name: 'S3 Utility'
+description: 'Execute various s3 (ls, sync, rm) and s3 helper commands (exists)'
 author: 'The Events Calendar (support@theeventscalendar.com)'
 branding:
   icon: file
   color: blue
 outputs:
   exists:
-    description: \'true\' if file or directory exists, \'false\' otherwise
+    description: With the exists s3 helper command - \'true\' if file or directory exists, \'false\' otherwise
+  ls_output:
+    description: Output from \'aws s3 ls\' command
 runs:
   using: 'docker'
   image: 'Dockerfile'
