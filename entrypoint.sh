@@ -24,15 +24,15 @@ fi
 
 # Default to us-east-1 if AWS_REGION not set.
 if [ -z "$S3_REGION" ]; then
-  export S3_REGION="us-east-1"
+  S3_REGION="us-east-1"
 fi
 
 # Override default AWS endpoint if user sets S3_ENDPOINT
-if [ -z "$S3_ENDPOINT" ]; then
-  export ENDPOINT_APPEND="--endpoint-url ${S3_ENDPOINT}"
+if [ -n "$S3_ENDPOINT" ]; then
+  ENDPOINT_APPEND="--endpoint-url ${S3_ENDPOINT}"
 fi
 
-export S3_PROFILE="--profile action-s3-utility"
+S3_PROFILE="--profile action-s3-utility"
 
 # Create a dedicated profile for this action
 aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
