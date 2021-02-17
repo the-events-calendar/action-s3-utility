@@ -32,6 +32,8 @@ if [ -z "$S3_ENDPOINT" ]; then
   ENDPOINT_APPEND="--endpoint-url $S3_ENDPOINT"
 fi
 
+S3_PROFILE="--profile action-s3-utility"
+
 # Create a dedicated profile for this action
 aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
 ${S3_ACCESS_KEY_ID}
@@ -42,17 +44,11 @@ EOF
 
 if [[ "$COMMAND" == "ls" ]]; then
   . /commands/ls.sh
-fi
-
-if [[ "$COMMAND" == "sync" ]]; then
+elif [[ "$COMMAND" == "sync" ]]; then
   . /commands/sync.sh
-fi
-
-if [[ "$COMMAND" == "exists" ]]; then
+elif [[ "$COMMAND" == "exists" ]]; then
   . /commands/exists.sh
-fi
-
-if [[ "$COMMAND" == "rm" ]]; then
+elif [[ "$COMMAND" == "rm" ]]; then
   . /commands/rm.sh
 fi
 

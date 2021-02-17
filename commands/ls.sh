@@ -7,8 +7,10 @@ if [ -z "$FILE" ]; then
   exit 1
 fi
 
+echo $ENDPOINT_APPEND
+
 # Verify file existence.
-output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} --profile action-s3-utility ${ENDPOINT_APPEND} $*")
+output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*")
 
 echo $output
 

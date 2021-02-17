@@ -8,7 +8,7 @@ if [ -z "$FILE" ]; then
 fi
 
 # Verify file existence.
-output=$(sh -c "aws s3 rm s3://${S3_BUCKET}/${FILE} --profile action-s3-utility ${ENDPOINT_APPEND} $*")
+output=$(sh -c "aws s3 rm s3://${S3_BUCKET}/${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*")
 
 echo $output
 
