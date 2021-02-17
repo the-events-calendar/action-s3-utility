@@ -41,13 +41,13 @@ text
 EOF
 
 case $the_command in
-  'sync')
+  sync)
 
     # Sync path.
     sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} --profile action-s3-utility --no-progress ${ENDPOINT_APPEND} $*"
 
     ;;
-  'exists')
+  exists)
     if [ -z "$FILE" ]; then
       echo "FILE is not set. Quitting."
       exit 1
@@ -68,7 +68,7 @@ case $the_command in
       echo "::set-output name=exists::false"
     fi
     ;;
-  'ls')
+  ls)
     if [ -z "$FILE" ]; then
       echo "FILE is not set. Quitting."
       exit 1
@@ -81,7 +81,7 @@ case $the_command in
 
     echo "::set-output name=value::${output}"
     ;;
-  'rm')
+  rm)
     if [ -z "$FILE" ]; then
       echo "FILE is not set. Quitting."
       exit 1
