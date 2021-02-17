@@ -7,7 +7,7 @@ if [ -z "$FILE" ]; then
   exit 1
 fi
 
-the_command="aws s3 ls s3://${S3_BUCKET}/${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*"
+the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 ls s3://${S3_BUCKET}/${FILE} $*"
 
 echo $the_command
 

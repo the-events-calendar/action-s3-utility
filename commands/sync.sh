@@ -2,7 +2,7 @@
 
 set -e
 
-the_command="aws s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} ${S3_PROFILE} --no-progress ${ENDPOINT_APPEND} $*"
+the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} --no-progress $*"
 
 echo $the_command
 

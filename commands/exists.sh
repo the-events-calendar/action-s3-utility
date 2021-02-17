@@ -9,7 +9,7 @@ fi
 
 echo "Checking for file existence at s3://${S3_BUCKET}/${FILE} at the ${S3_ENDPOINT}"
 
-the_command="aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*"
+the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3api head-object --bucket ${S3_BUCKET} --key ${FILE} $*"
 
 echo $the_command
 
