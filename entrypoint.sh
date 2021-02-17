@@ -33,7 +33,7 @@ if [ -z "$S3_ENDPOINT" ]; then
 fi
 
 # Create a dedicated profile for this action
-aws configure --profile action-s3 <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
 ${S3_ACCESS_KEY_ID}
 ${S3_SECRET_ACCESS_KEY}
 ${S3_REGION}
@@ -44,7 +44,7 @@ case $the_command in
   'sync')
 
     # Sync path.
-    sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} --profile action-s3 --no-progress ${ENDPOINT_APPEND} $*"
+    sh -c "aws s3 sync ${SOURCE_DIR:-.} s3://${S3_BUCKET}/${DEST_DIR} --profile action-s3-utility --no-progress ${ENDPOINT_APPEND} $*"
 
     ;;
   'exists')
@@ -56,7 +56,7 @@ case $the_command in
     echo "Checking for file existence at s3://${S3_BUCKET}/${FILE} at the ${S3_ENDPOINT}"
 
     # Verify file existence.
-    sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*"
+    sh -c "aws s3api head-object --bucket ${S3_BUCKET} --key ${FILE} --profile action-s3-utility ${ENDPOINT_APPEND} $*"
 
     # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
     if [ $? == 0 ]
@@ -75,7 +75,9 @@ case $the_command in
     fi
 
     # Verify file existence.
-    output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*")
+    output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} --profile action-s3-utility ${ENDPOINT_APPEND} $*")
+
+    echo $output
 
     echo "::set-output name=value::${output}"
     ;;
@@ -86,14 +88,16 @@ case $the_command in
     fi
 
     # Verify file existence.
-    output=$(sh -c "aws s3 rm s3://${S3_BUCKET}/${FILE} --profile action-s3 ${ENDPOINT_APPEND} $*")
+    output=$(sh -c "aws s3 rm s3://${S3_BUCKET}/${FILE} --profile action-s3-utility ${ENDPOINT_APPEND} $*")
+
+    echo $output
 
     echo "::set-output name=value::${output}"
     ;;
 esac
 
 # Clear out credentials after we're done.
-aws configure --profile action-s3 <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
 null
 null
 null
