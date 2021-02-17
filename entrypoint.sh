@@ -24,12 +24,12 @@ fi
 
 # Default to us-east-1 if AWS_REGION not set.
 if [ -z "$S3_REGION" ]; then
-  export S3_REGION="us-east-1"
+  S3_REGION="us-east-1"
 fi
 
 # Override default AWS endpoint if user sets S3_ENDPOINT
 if [ -z "$S3_ENDPOINT" ]; then
-  export ENDPOINT_APPEND="--endpoint-url $S3_ENDPOINT"
+  ENDPOINT_APPEND="--endpoint-url $S3_ENDPOINT"
 fi
 
 # Create a dedicated profile for this action
@@ -41,19 +41,19 @@ text
 EOF
 
 if [[ "$COMMAND" == "ls" ]]; then
-  sh /commands/ls.sh
+  . /commands/ls.sh
 fi
 
 if [[ "$COMMAND" == "sync" ]]; then
-  sh /commands/sync.sh
+  . /commands/sync.sh
 fi
 
 if [[ "$COMMAND" == "exists" ]]; then
-  sh /commands/exists.sh
+  . /commands/exists.sh
 fi
 
 if [[ "$COMMAND" == "rm" ]]; then
-  sh /commands/rm.sh
+  . /commands/rm.sh
 fi
 
 # Clear out credentials after we're done.
