@@ -2,22 +2,8 @@
 
 set -e
 
-declare -a commands=("sync" "exists" "ls")
-
 if [ -z "$COMMAND" ]; then
   echo "You must specify a command to execute. Quitting."
-  exit 1
-fi
-
-for command_item in "${commands[@]}"
-do
-  if [[ "$command_item" == "$COMMAND" ]]; then
-    the_command=$COMMAND
-  fi
-done
-
-if [ -z "$the_command" ]; then
-  echo "You must specify a valid command (sync, exists). Quitting."
   exit 1
 fi
 
