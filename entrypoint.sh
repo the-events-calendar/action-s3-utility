@@ -29,7 +29,7 @@ fi
 
 # Override default AWS endpoint if user sets S3_ENDPOINT
 if [ -z "$S3_ENDPOINT" ]; then
-  export ENDPOINT_APPEND="--endpoint-url $S3_ENDPOINT"
+  export ENDPOINT_APPEND="--endpoint-url ${S3_ENDPOINT}"
 fi
 
 export S3_PROFILE="--profile action-s3-utility"
