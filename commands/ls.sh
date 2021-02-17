@@ -7,10 +7,12 @@ if [ -z "$FILE" ]; then
   exit 1
 fi
 
-echo $ENDPOINT_APPEND
+the_command="aws s3 ls s3://${S3_BUCKET}/${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*"
+
+echo $the_command
 
 # Verify file existence.
-output=$(sh -c "aws s3 ls s3://${S3_BUCKET}/${FILE} ${S3_PROFILE} ${ENDPOINT_APPEND} $*")
+output=$(sh -c $the_command)
 
 echo $output
 
