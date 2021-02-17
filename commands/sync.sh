@@ -7,4 +7,4 @@ the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 sync ${SOURCE_DIR:-.} s3://
 echo $the_command
 
 # Sync path.
-sh -c $the_command
+sh -c "$the_command"

@@ -12,7 +12,7 @@ the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 rm s3://${S3_BUCKET}/${FILE
 echo $the_command
 
 # Verify file existence.
-output=$(sh -c $the_command)
+output=$(sh -c "$the_command")
 
 echo $output
 

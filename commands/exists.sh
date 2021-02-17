@@ -14,7 +14,7 @@ the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3api head-object --bucket ${S
 echo $the_command
 
 # Verify file existence.
-sh -c $the_command
+sh -c "$the_command"
 
 # XXX: we are just checking the error code, but should check the result for a 404, and raise error in other cases
 if [ $? == 0 ]
