@@ -20,5 +20,3 @@ echo $the_command
 output=$(sh -c "$the_command")
 
 echo $output
-
-echo "::set-output name=ls_output::${output}"

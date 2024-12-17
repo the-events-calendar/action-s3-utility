@@ -1,5 +1,5 @@
 name: 'S3 Utility'
-description: 'Execute various s3 (ls, sync, rm) and s3 helper commands (exists)'
+description: 'Execute various s3 (ls, sync, rm, cp) and s3 helper commands (exists)'
 author: 'The Events Calendar (support@theeventscalendar.com)'
 branding:
   icon: file
