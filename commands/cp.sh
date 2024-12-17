@@ -7,12 +7,12 @@ if [ -z "$FILE" ]; then
   exit 1
 fi
 
-if [ -z "$TARGET" ]; then
-  echo "FILE is not set. Quitting."
+if [ -z "$DESTINATION" ]; then
+  echo "Destination is not set. Quitting."
   exit 1
 fi
 
-the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 cp s3://${S3_BUCKET}/${FILE} ${TARGET}"
+the_command="aws ${S3_PROFILE} ${ENDPOINT_APPEND} s3 cp s3://${S3_BUCKET}/${FILE} ${DESTINATION}"
 
 echo $the_command
 
