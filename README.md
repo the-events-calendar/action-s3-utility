@@ -32,14 +32,14 @@ You can add the following as a step in one of your workflows:
 ```
 - name: S3 exists
   uses: the-events-calendar/action-s3-utility@main
-	env:
-		COMMAND: exists
-		S3_BUCKET: ${{ secrets.S3_BUCKET }}
-		S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-		S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-		S3_REGION: ${{ secrets.S3_REGION }}
-		S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-		FILE: 'some-file-name.txt'
+  env:
+    COMMAND: exists
+    S3_BUCKET: ${{ secrets.S3_BUCKET }}
+    S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+    S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+    S3_REGION: ${{ secrets.S3_REGION }}
+    S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+    FILE: 'some-file-name.txt'
 ```
 
 #### Configuration
@@ -61,14 +61,14 @@ You can add the following as a step in one of your workflows:
 ```
 - name: S3 ls
   uses: the-events-calendar/action-s3-utility@main
-	env:
-		COMMAND: ls
-		S3_BUCKET: ${{ secrets.S3_BUCKET }}
-		S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-		S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-		S3_REGION: ${{ secrets.S3_REGION }}
-		S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-		FILE: 'some-file-name.txt'
+  env:
+    COMMAND: ls
+    S3_BUCKET: ${{ secrets.S3_BUCKET }}
+    S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+    S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+    S3_REGION: ${{ secrets.S3_REGION }}
+    S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+    FILE: 'some-file-name.txt'
 ```
 
 #### Configuration
@@ -90,14 +90,14 @@ You can add the following as a step in one of your workflows:
 ```
 - name: S3 rm
   uses: the-events-calendar/action-s3-utility@main
-	env:
-		COMMAND: rm
-		S3_BUCKET: ${{ secrets.S3_BUCKET }}
-		S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-		S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-		S3_REGION: ${{ secrets.S3_REGION }}
-		S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-		FILE: 'some-file-name.txt'
+  env:
+    COMMAND: rm
+    S3_BUCKET: ${{ secrets.S3_BUCKET }}
+    S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+    S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+    S3_REGION: ${{ secrets.S3_REGION }}
+    S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+    FILE: 'some-file-name.txt'
 ```
 
 #### Configuration
@@ -119,14 +119,14 @@ You can add the following as a step in one of your workflows:
 ```
 - name: S3 sync
   uses: the-events-calendar/action-s3-utility@main
-	env:
-		COMMAND: sync
-		S3_BUCKET: ${{ secrets.S3_BUCKET }}
-		S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-		S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-		S3_REGION: ${{ secrets.S3_REGION }}
-		S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-		SOURCE_DIR: 'some-dir/'
+  env:
+    COMMAND: sync
+    S3_BUCKET: ${{ secrets.S3_BUCKET }}
+    S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+    S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+    S3_REGION: ${{ secrets.S3_REGION }}
+    S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+    SOURCE_DIR: 'some-dir/'
 ```
 
 #### Configuration
@@ -148,15 +148,15 @@ You can add the following as a step in one of your workflows:
 ```
 - name: S3 cp
   uses: the-events-calendar/action-s3-utility@main
-	env:
-		COMMAND: cp
-		S3_BUCKET: ${{ secrets.S3_BUCKET }}
-		S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
-		S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-		S3_REGION: ${{ secrets.S3_REGION }}
-		S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
-		FILE: 'some-file-name.txt'
-		DESTINATION: 'some-dir/some-file-name.txt'
+  env:
+    COMMAND: cp
+    S3_BUCKET: ${{ secrets.S3_BUCKET }}
+    S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+    S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+    S3_REGION: ${{ secrets.S3_REGION }}
+    S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+    FILE: 'some-file-name.txt'
+    DESTINATION: 'some-dir/some-file-name.txt'
 ```
 
 #### Configuration
