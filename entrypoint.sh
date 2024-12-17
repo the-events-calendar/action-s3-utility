@@ -35,7 +35,7 @@ fi
 S3_PROFILE="--profile action-s3-utility"
 
 # Create a dedicated profile for this action
-aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3-utility <<-EOF >/dev/null 2>&1
 ${S3_ACCESS_KEY_ID}
 ${S3_SECRET_ACCESS_KEY}
 ${S3_REGION}
@@ -50,10 +50,12 @@ elif [[ "$COMMAND" == "exists" ]]; then
   . /commands/exists.sh
 elif [[ "$COMMAND" == "rm" ]]; then
   . /commands/rm.sh
+elif [[ "$COMMAND" == "cp" ]]; then
+  . /commands/cp.sh
 fi
 
 # Clear out credentials after we're done.
-aws configure --profile action-s3-utility <<-EOF > /dev/null 2>&1
+aws configure --profile action-s3-utility <<-EOF >/dev/null 2>&1
 null
 null
 null
