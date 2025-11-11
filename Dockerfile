@@ -5,7 +5,7 @@ LABEL repository="https://github.com/the-events-calendar/action-s3-utility"
 LABEL maintainer="The Events Calendar <support@theeventscalendar.com>"
 
 # https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst
-ENV AWSCLI_VERSION='1.35.36'
+ENV AWSCLI_VERSION='1.42.70'
 
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
 
