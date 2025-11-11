@@ -20,8 +20,8 @@ sh -c "$the_command"
 if [ $? == 0 ]
 then
   echo "File exists."
-  echo "::set-output name=exists::true"
+  echo "exists=true" >> $GITHUB_OUTPUT
 else
   echo "File does not exist."
-  echo "::set-output name=exists::false"
+  echo "exists=false" >> $GITHUB_OUTPUT
 fi

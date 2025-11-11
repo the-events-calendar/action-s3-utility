@@ -16,4 +16,4 @@ output=$(sh -c "$the_command")
 
 echo $output
 
-echo "::set-output name=ls_output::${output}"
+echo "ls_output=${output}" >> $GITHUB_OUTPUT

@@ -16,4 +16,4 @@ output=$(sh -c "$the_command")
 
 echo $output
 
-echo "::set-output name=value::${output}"
+echo "value=${output}" >> $GITHUB_OUTPUT
